@@ -1,0 +1,91 @@
+"""
+
+def toggle_accordion(*x):
+    ctx = dash.callback_context
+    n_rows = int(len(x)/2)
+    
+    if not ctx.triggered:
+        return None
+    else:
+        button_id = ctx.triggered[0]["prop_id"].split(".")[0]
+    
+    #print(x)
+    results = []
+    for i in range(n_rows):
+        results.append(x[n_rows+i])
+
+    results = np.zeros(n_rows, dtype=bool)
+    for index, item in enumerate(button_ids):
+        if button_id == item and x[index]:
+            state = x[n_rows+index]
+            results[index] = not state 
+            break
+
+        else:
+            continue
+    return tuple(results)
+
+
+@app.callback(
+    [Output(f"ccollapse-{i}", "is_open") for i in range(1, number_of_rows+1)],
+    [Input(f"cgroup-{i}-toggle", "n_clicks") for i in range(1, number_of_rows+1)],
+    [State(f"ccollapse-{i}", "is_open") for i in range(1, number_of_rows+1)],
+)
+def ctoggle_accordion(*x):
+    ctx = dash.callback_context
+    n_rows = int(len(x)/2)
+    
+    if not ctx.triggered:
+        return None
+    else:
+        button_id = ctx.triggered[0]["prop_id"].split(".")[0]
+    
+    results = []
+    for i in range(n_rows):
+        results.append(x[n_rows+i])
+
+    results = np.zeros(n_rows, dtype=bool)
+    for index, item in enumerate(cbutton_ids):
+        if button_id == item and x[index]:
+            state = x[n_rows+index]
+            results[index] = not state 
+            break
+
+        else:
+            continue
+    return tuple(results)
+
+
+@app.callback(
+    [Output(f"modal-{i}", "is_open") for i in range(1, number_of_rows+1)],
+    [Input(f"clear-button-{i}", "n_clicks") for i in range(1, number_of_rows+1)] 
+    + [Input(f"close-{i}", "n_clicks") for i in range(1, number_of_rows+1)]
+    + [Input(f"submit-{i}", "n_clicks") for i in range(1, number_of_rows+1)],
+    [State(f"modal-{i}", "is_open") for i in range(1, number_of_rows+1)]
+)
+def toggle_modal(*x):
+
+    n_inputs = int(len(x)/4)
+    
+    n_clicks_clear = list(x[:n_inputs])
+    n_clicks_close = list(x[n_inputs:2*n_inputs])
+    n_clicks_submit = list(x[2*n_inputs:3*n_inputs])
+    states = list(x[3*n_inputs:])
+
+    for index in range(n_inputs):
+        if n_clicks_clear[index] or (n_clicks_close[index] or n_clicks_submit[index]):
+            states[index] = not states[index]
+        else:
+            continue
+    return states
+
+"""
+button_ids = []
+for i in range(1, number_of_rows+1):
+    button_ids.append(f"group-{i}-toggle")
+
+cbutton_ids = []
+for i in range(1, number_of_rows+1):
+    cbutton_ids.append(f"cgroup-{i}-toggle")
+
+"""
