@@ -1,11 +1,11 @@
 body {
     background-color: #f2f2f2;
     margin: 1%;
-    
+
   }
 
 
-html { 
+html {
     height:100%;
     }
 
@@ -29,23 +29,15 @@ html {
     border: 0 !important;
     border-radius: 0 !important;
     background-color: #0D1E2E;
-    
-    
-
-
-
 }
 
 .navbar {
-    box-shadow: 3px 3px 3px 3px 
-    #013256 !important;
-
+    box-shadow: 2px 2px 2px 2px lightgrey !important;
+    background: #013256 !important;
+    border-radius: 5px !important;
+    
 }
 
-
-.navbar {
-    background: #0D1E2E !important;
-}
 /*
 .navbar {
     background: #0D1E2E !important;
@@ -96,3 +88,12 @@ html {
     width : 100%;
     margin : auto;
 }
+
+.pretty_container {
+    border-radius: 5px !important;
+    background-color: #f9f9f9 !important;
+    margin: 10px !important;
+    padding: 15px !important;
+    position: relative !important;
+    box-shadow: 2px 2px 2px lightgrey !important;
+  }
