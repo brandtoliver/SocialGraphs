@@ -27,7 +27,7 @@ Parti_farver = {'ALT':'#2b8738','DF':'#eac73e','EL':'#e6801a','KD':'#8b8474','KF
 
 question_time = html.Div(
     dbc.Row([
-        dbc.Col(dbc.Container(dcc.Graph(id="question_time_graph",style={'backgroundColor':'#f9f9f9'})), className="pretty_container"),
+        dbc.Col(dcc.Graph(id="question_time_graph",style={'backgroundColor':'#f9f9f9'}), className="pretty_container"),
         dbc.Col([html.P("First the number of $20-questions over time is visualised. From the figure on the left it is apparent that memebers of parlament tend to only ask questions when not part of the government. Below you can select which of the parties to display in the graph."),
         dcc.Dropdown(id="question_time_dropdown", options=[{'label':'Venstre', 'value': 'V'},
                                             {'label':'Socialdemokratiet', 'value': 'S'},
@@ -58,6 +58,10 @@ def update_question_time(selected_dropdown_value):
     return figure
 
 ##############
+Text_analysis = html.Div(dbc.Row(html.H2("Text Analysis",style={'textAlign':'center'}),className="pretty_container"))
+
+
+############
 
 df_sentiment = pd.read_csv('data/sentiment1.csv')
 
@@ -112,11 +116,14 @@ Sentiment2 = html.Div([
                                         {'label':'Uden for folketingsgrupperne', 'value': 'UFG'},
                                         {'label':'Det Konservative Folkeparti', 'value': 'KF'},
                                         {'label':'udpeget af SF', 'value': 'udpeget af SF'}],
-                                        multi=True, value=['V','S', 'DF'], style={"margin-left": "auto","margin-right": "auto","width": "100%"})
+                                        multi=True, value=['V','S', 'DF'], style={"margin-left": "auto","margin-right": "auto","width": "50%"})
                                         ], className="pretty_container")]),
     dbc.Row([
         dbc.Col(dcc.Graph(id="sentiment2_graph",style={'backgroundColor':'#f9f9f9'}), className="pretty_container"),
-        dbc.Col(dcc.Graph(id="bar_plot", style={'backgroundColor':'#f9f9f9'}, figure={"data":[{'x':x_data,'y':y_data, 'type':'bar', "marker" : dict(color=['#2b8738','#eac73e','#e6801a','#96b226','#3fb2be','#127b7f','#733280','#a82721','#e07ea8','#663300','#254264','#e07ea8'])}], "layout": {"height":"300", "width":"400", "paper_bgcolor":"#f9f9f9", "plot_bgcolor":"#f9f9f9"}}), className="pretty_container")
+        dbc.Col(dcc.Graph(id="bar_plot", style={'backgroundColor':'#f9f9f9'},
+            figure={"data":[{'x':y_data,'y':x_data, 'type':'bar', 'orientation':'h',
+            "marker" : dict(color=['#2b8738','#eac73e','#e6801a','#96b226','#3fb2be','#127b7f','#733280','#a82721','#e07ea8','#663300','#254264','#e07ea8'],
+            )}], "layout": {"title":"Avg. Sentiment of parties","height":350, "width":"400", "xaxis":{"title":"Avg. sentiment"}, "paper_bgcolor":"#f9f9f9", "plot_bgcolor":"#f9f9f9", 'margin': {'l': 180, 'b': 50, 't': 80, 'r': 50}}}), className="pretty_container", width=4)
         ])
     ])
 
@@ -141,7 +148,7 @@ Parti_farver_hsl = {'ALT':[128,52,35],'DF':[48,80,58],'EL':[30,80,50],'KD':[42,9
 
 word_cloud = html.Div(
     dbc.Row([
-        dbc.Col([html.P("A wordcloud of 'important' words are displayed to the left. The importantness of words are determined by how many times a word is used by a party offset by how many times other parties use that word (TF-IDF)."),
+        dbc.Col([html.P("A wordcloud of 'important' words are displayed to the left. The importantness of words are determined by how many times a word is used by a party offset by how many times other parties use that word (TF-IDF). Select a party using the dropdown below."),
         dcc.Dropdown(id="word_cloud_dropdown", options=[{'label':'Venstre', 'value': 'V'},
                                             {'label':'Socialdemokratiet', 'value': 'S'},
                                             {'label':'Alternativet', 'value': 'ALT'},
@@ -155,7 +162,8 @@ word_cloud = html.Div(
                                             {'label':'Uden for folketingsgrupperne', 'value': 'UFG'},
                                             {'label':'Det Konservative Folkeparti', 'value': 'KF'},
                                             {'label':'udpeget af SF', 'value': 'udpeget af SF'}],
-                                            multi=False, value='DF', style={"margin-left": "auto","margin-right": "auto","width": "100%"}) ], width=3),
+                                            multi=False, value='DF', style={"margin-left": "auto","margin-right": "auto","width": "100%"}),
+                                            html.P("These words could be interpreted as important topics of a given party") ], width=3),
         dbc.Col([html.Img(id='word_cloud')], width=4),
         dbc.Col(dcc.Graph(id="word_graph",style={'backgroundColor':'#f9f9f9'}))
     ],className="pretty_container")
@@ -203,6 +211,7 @@ layout = html.Div(
     [
         intro,
         question_time,
+        Text_analysis,
         #Sentiment1,
         word_cloud,
         Sentiment2

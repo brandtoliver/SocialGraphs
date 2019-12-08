@@ -35,7 +35,7 @@ html {
     box-shadow: 2px 2px 2px 2px lightgrey !important;
     background: #013256 !important;
     border-radius: 5px !important;
-    
+
 }
 
 /*
@@ -51,6 +51,8 @@ html {
     top: 0;
     z-index: 10;
 }
+
+
 
 .overlayOri {
     position: fixed;
@@ -97,3 +99,8 @@ html {
     position: relative !important;
     box-shadow: 2px 2px 2px lightgrey !important;
   }
+
+.h2 {
+text-align: center !important;
+
+}
