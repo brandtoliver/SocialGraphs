@@ -22,10 +22,10 @@ intro = html.Div(
         dbc.Row([
             dbc.Col(html.P("The page should say clearly what the dataset is and give the reader some idea of its most important properties "),className="pretty_container",width={'size':5, "order": 1}),
             dbc.Col([html.P("explain about data"),dbc.Button("Download Data", href='https://raw.githubusercontent.com/brandtoliver/SocialGraphs/master/df_all.csv', external_link=True, outline=True, color="secondary", className="mr-1")],className="pretty_container",width={'size':4, "order": 2}),
-            dbc.Col([dbc.Row([html.Div([html.H5("Num of nodes:"),html.H3("482")])], style={"height": 135, "width":150, 'text-align': 'center'}, className="pretty_container", align="center"),
-                    dbc.Row([html.Div([html.H5("Num of edges:"),html.H3("4173")])], style={"height": 135, "width":150, 'text-align': 'center'}, className="pretty_container", align="center"), #,html.Br()
+            dbc.Col([dbc.Row([html.Div([html.H5("Num of nodes:"),html.H3("474")])], style={"height": 135, "width":150, 'text-align': 'center'}, className="pretty_container", align="center"),
+                    dbc.Row([html.Div([html.H5("Num of edges:"),html.H3("4092")])], style={"height": 135, "width":150, 'text-align': 'center'}, className="pretty_container", align="center"), #,html.Br()
                     dbc.Row([html.Div([html.H5("Avg. degree:"),html.H3("17.32")])], style={"height": 135, "width":150, 'text-align': 'center'}, className="pretty_container", align="center"),
-                    dbc.Row([html.Div([html.H5("Num of questions:"),html.H3("49129")])], style={"height": 135, "width":150, 'text-align': 'center'}, className="pretty_container", align="center")], align='center', width={"order": 3})
+                    dbc.Row([html.Div([html.H5("Num of questions:"),html.H3("46429")])], style={"height": 135, "width":150, 'text-align': 'center'}, className="pretty_container", align="center")], align='center', width={"order": 3})
             ],justify='center'))
 
 ##############
@@ -66,7 +66,7 @@ network1 = html.Div(
             dbc.Col(dcc.Graph(id='network_Graph',figure=fig), className="pretty_container", width = 'auto'),
             dbc.Col(dcc.Graph(id="degree_plot", style={'backgroundColor':'#f9f9f9'},
                 figure={"data":[{'x':n, 'y':x, 'type':'scatter', 'marker':{'size': 10}}
-             ], "layout": {"title":"Degree distribution","height":450, "width":350, "xaxis":{"title":"Degree (log)", "type":'log','showgrid':False}, "yaxis":{"title":"Frequency (log)","type":'log','showgrid':False}, "paper_bgcolor":"#f9f9f9", "plot_bgcolor":"#f9f9f9", 'margin': {'l': 10, 'b': 80, 't': 80, 'r': 5}}}), width = 3, className="pretty_container")
+             ], "layout": {"title":"Degree distribution","height":450, "width":350, "xaxis":{"title":"Degree (log)", "type":'log','showgrid':False}, "yaxis":{"title":"Frequency (log)","type":'log','showgrid':False}, "paper_bgcolor":"#f9f9f9", "plot_bgcolor":"#f9f9f9", 'margin': {'l': 30, 'b': 80, 't': 80, 'r': 5}}}), width = 3, className="pretty_container")
         ],justify='center')
     )
 

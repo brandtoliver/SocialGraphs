@@ -6,7 +6,6 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 
-import networkx as nx
 import numpy as np
 from io import BytesIO
 from wordcloud import WordCloud
