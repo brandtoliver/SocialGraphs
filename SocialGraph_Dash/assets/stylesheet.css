@@ -100,7 +100,9 @@ html {
     box-shadow: 2px 2px 2px lightgrey !important;
   }
 
-.h2 {
-text-align: center !important;
-
-}
+.H3 {
+  text-align: center !important;
+  font-family: Times;
+  display:flex;
+  align-items:right;
+  }

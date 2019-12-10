@@ -7,160 +7,31 @@ import pandas as pd
 import numpy as np
 
 from app import app
-from apps import text, network, home
+from apps import text, network, home, MF
 
 navbar1 = dbc.NavbarSimple(
     children=[
-        dbc.NavItem(dbc.NavLink("Overview", href="#")),
-        dbc.NavItem(dbc.NavLink("Explainer notebook", href="#")),
+        dbc.NavItem(dbc.NavLink("Overview", href="overview")),
         dbc.DropdownMenu(
             children=[
-                dbc.DropdownMenuItem("More pages", header=True),
-                dbc.DropdownMenuItem("Page 2", href="#"),
-                dbc.DropdownMenuItem("Page 3", href="#"),
+                dbc.DropdownMenuItem("Individual administrations", header=True),
+                dbc.DropdownMenuItem("Anders Fogh Rasmussen", href="AndersFoghRasmussen"),
+                dbc.DropdownMenuItem("Lars Løkke I", href="LarsLokkeI"),
+                dbc.DropdownMenuItem("Helle Thorning", href="HelleThorning"),
+                dbc.DropdownMenuItem("Lars Løkke II", href="LarsLokkeII"),
+                dbc.DropdownMenuItem("Mette Frederiksen", href="MetteFrederiksen")
             ],
             nav=True,
             in_navbar=True,
-            label="More",
+            label="Administrations",
         ),
+        dbc.NavItem(dbc.NavLink("Explainer notebook", href="https://github.com/brandtoliver/SocialGraphs")),
     ],
-    brand="§ 20-spørgsmål",
+    brand="Parliamentary §20-Questions",
     brand_href="#",
     color="primary",
     dark=True,
 )
-
-#Top navbar
-navbar = dbc.Navbar(
-    [
-        html.A(
-            dbc.Row(
-                [
-                    dbc.Col(
-
-                        html.H4("Social graphs and interactions", style={"fontSize":50, "fontFamily":"Georgia"}),style={"color":"white","textAlign":"center","paddingTop":10}
-
-                    ),
-                ],
-
-                align="center",
-                no_gutters=True,
-
-            ),
-
-        ),
-        dbc.NavbarToggler(id="navbar-toggler"),
-        #dbc.Collapse(right_bar, id="navbar-collapse", navbar=True),
-    ],
-    dark = True,
-    #className="test"
-    #color="dark",
-)
-
-
-
-#Left side navbar
-vertical_navbar = dbc.Col(
-    [
-        dbc.Nav(
-            [
-                dbc.Card(
-
-                    dbc.Button(
-                        "Overview",
-                        style={"backgroundColor":"#0D1E2E", "borderColor":"#0D1E2E", "color":"#f2f2f2", "fontFamily": "Georgia", "fontSize":25},
-                        outline=False,
-                        #color="dark",
-                        href="/overview"
-
-                    )
-                ),
-                dbc.Card(
-                    [
-                        dbc.Button(
-                            "Administrations",
-                            id="pur-toggle",
-                            style={"backgroundColor":"#0D1E2E", "borderColor":"#0D1E2E", "color":"#f2f2f2", "fontFamily": "Georgia", "fontSize":25},
-                            outline=False,
-                            href="/Administration"
-                        ),
-                        dbc.Collapse(
-                            dbc.CardBody(
-                                dbc.Nav(
-                                    [
-                                        dbc.Button(
-                                        "Administration 1",
-                                        style={"backgroundColor":"#0D1E2E", "color":"white","borderColor":"#132a3f", "fontFamily": "Georgia", "fontSize":20},
-                                        outline=False,
-                                        href="/Administration1"
-                                        ),
-                                        dbc.Button(
-                                        "Administration 2",
-                                        style={"backgroundColor":"#0D1E2E", "color":"white","borderColor":"#132a3f","fontFamily": "Georgia", "fontSize":20},
-                                        outline=False,
-                                        href="/Administration2"
-                                        ),
-                                         dbc.Button(
-                                        "Administration 3",
-                                        style={"backgroundColor":"#0D1E2E", "color":"white","borderColor":"#132a3f","fontFamily": "Georgia", "fontSize":20},
-                                        outline=False,
-                                        href="/Administration3"
-                                        ),
-                                         dbc.Button(
-                                        "Administration 4",
-                                        style={"backgroundColor":"#0D1E2E", "color":"white","borderColor":"#132a3f","fontFamily": "Georgia", "fontSize":20},
-                                        outline=False,
-                                        href="/Administration4"
-                                        ),
-                                         dbc.Button(
-                                        "Administration 5",
-                                        style={"backgroundColor":"#0D1E2E", "color":"white","borderColor":"#132a3f","fontFamily": "Georgia", "fontSize":20},
-                                        outline=False,
-                                        href="/Administration5"
-                                        ),
-                                         dbc.Button(
-                                        "Administration 6",
-                                        style={"backgroundColor":"#0D1E2E", "color":"white","borderColor":"#132a3f","fontFamily": "Georgia", "fontSize":20},
-                                        outline=False,
-                                        href="/Administration6"
-                                        ),
-                                         dbc.Button(
-                                        "Administration 7",
-                                        style={"backgroundColor":"#0D1E2E", "color":"white","borderColor":"#132a3f","fontFamily": "Georgia", "fontSize":20},
-                                        outline=False,
-                                        href="/Administration7"
-                                        ),
-
-                                    ],
-                                    vertical=True,
-                                )
-                            ),
-                            id="collapse-pur",
-                        ),
-                    ], className="collapse_button",
-                    style={"backgroundColor":"#d6dbda"}
-                ),
-
-                dbc.Card(
-                    dbc.Button(
-                        "Explainer notebook",
-                        style={"backgroundColor":"#0D1E2E", "borderColor":"#0D1E2E", "color":"#f2f2f2", "fontFamily": "Georgia", "fontSize":25},
-                        outline=False,
-                        href="Explainer"
-                    ),
-                )
-            ],
-            vertical=True,
-        ),
-    ],
-    width=2,
-    className="leftbar light",
-    style={"backgroundColor":"#0D1E2E", "height":"1000px"}
-)
-
-
-#app layout:
-
 
 app.layout = html.Div(
     [
@@ -185,7 +56,16 @@ app.layout = html.Div(
 def display_page(pathname):
     if pathname == '/overview':
         return network.layout
-    elif pathname == '/text':
+
+    elif pathname == '/MetteFrederiksen':
+        return MF.layout
+    elif pathname == '/LarsLokkeII':
+        return text.layout
+    elif pathname == '/HelleThorning':
+        return text.layout
+    elif pathname == '/LarsLokkeI':
+        return text.layout
+    elif pathname == '/AndersFoghRasmussen':
         return text.layout
     else:
         return network.layout
